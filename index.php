@@ -12,7 +12,9 @@ if(isset($_GET['firstName']) && isset($_GET['lastname']) && isset($_GET['points'
   
   // lock and read current
   $fp = fopen($filename, "r+");
-  while (!flock($fp, LOCK_EX)) {}
+  while (!flock($fp, LOCK_EX)) {
+    usleep(1000); // 1ms sleep
+  }
   $data = include $filename;
 
   // append data
@@ -41,7 +43,8 @@ if(isset($_GET['firstName']) && isset($_GET['lastname']) && isset($_GET['points'
     unset($data[$key]);
   }
   
-  ftruncate($fp, 0); // очищаем файл
+  // put contents via lock
+  ftruncate($fp, 0);
   fwrite($fp, '<?php return ' . var_export($data, true).';');
   fflush($fp);
   flock($fp, LOCK_UN);
@@ -49,7 +52,7 @@ if(isset($_GET['firstName']) && isset($_GET['lastname']) && isset($_GET['points'
 }
 
 if(!isset($data)) {
-    $data = file_exists($this->filename) ? include $this->filename : array();
+    $data = file_exists($filename) ? include $filename : array();
 }
 
 echo json_encode($data);
