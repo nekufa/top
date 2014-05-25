@@ -39,8 +39,8 @@ if(isset($_GET['firstName']) && isset($_GET['lastname']) && isset($_GET['points'
     }
     
     // remove min and fix index
-    $data = array_values($data);
     unset($data[$key]);
+    $data = array_values($data);
   }
   
   // put contents via lock
