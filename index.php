@@ -47,7 +47,6 @@ if(isset($_GET['firstName']) && isset($_GET['lastName']) && isset($_GET['points'
       
       // remove min and fix index
       unset($data[$key]);
-      $data = array_values($data);
     }      
   }
 
