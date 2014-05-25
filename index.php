@@ -62,4 +62,4 @@ if(!isset($data)) {
     $data = file_exists($filename) ? include $filename : array();
 }
 
-echo json_encode($data);
+echo json_encode(array_values($data));
