@@ -25,9 +25,9 @@ if(isset($_GET['firstName']) && isset($_GET['lastName']) && isset($_GET['points'
   
   $data = include $filename;
 
-  $key = json_encode($row);
+  $key = json_encode(array($_GET['firstName'],  $_GET['lastName']));
   
-  if(!isset($data[$key])) {
+  if(!isset($data[$key]) || $data[$key]['points'] < $row['points']) {
     // append data
     $data[$key] = $row;
     
