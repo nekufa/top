@@ -19,7 +19,7 @@ if(isset($_GET['firstName']) && isset($_GET['lastName']) && isset($_GET['points'
   
   // lock and read current
   $fp = fopen($filename, "r+");
-  while (!flock($fp, LOCK_EX)) {
+  while (!flock($fp, LOCK_EX)) { // wait untill we get lock
     usleep(1000); // 1ms sleep
   }
   
