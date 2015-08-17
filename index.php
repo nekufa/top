@@ -63,4 +63,3 @@ if(!isset($data)) {
 }
 
 echo json_encode(array_values($data));
-
